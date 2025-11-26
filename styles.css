@@ -1,0 +1,244 @@
+:root {
+    --sidebar-bg: #1a1a1a;
+    --sidebar-hover: #333;
+    --primary-red: #ff3333;
+    --text-light: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    overflow-x: hidden;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--sidebar-bg);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.brand-section {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.nav-links {
+    flex-grow: 1;
+    padding-top: 20px;
+    list-style: none;
+    padding-left: 0;
+}
+
+.nav-item {
+    width: 100%;
+}
+
+.nav-link {
+    color: #aaa;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    border-left: 4px solid transparent;
+    cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: var(--sidebar-hover);
+    color: var(--text-light);
+    border-left-color: var(--primary-red);
+}
+
+.nav-link i {
+    width: 25px;
+    margin-right: 10px;
+}
+
+.logout-section {
+    padding: 20px;
+    border-top: 1px solid #333;
+}
+
+.logout-link {
+    color: var(--primary-red);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.logout-link:hover {
+    color: #ff6666;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+/* Welcome Section Styles */
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.welcome-logo-large {
+    width: 120px;
+    height: 120px;
+    background-color: var(--primary-red);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(255, 51, 51, 0.3);
+}
+
+.welcome-title {
+    color: var(--primary-red);
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.welcome-subtitle {
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.contact-card {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 600px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #444;
+    font-size: 1.1rem;
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-item i {
+    color: var(--primary-red);
+    width: 40px;
+    font-size: 1.4rem;
+}
+
+/* CRUD Section Styles */
+.card {
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-primary-custom {
+    background-color: var(--primary-red);
+    border-color: var(--primary-red);
+    color: white;
+}
+
+.btn-primary-custom:hover {
+    background-color: #cc0000;
+    border-color: #cc0000;
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.action-btn {
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+/* Utility */
+.d-none {
+    display: none !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media print {
+
+    .sidebar,
+    .no-print {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}

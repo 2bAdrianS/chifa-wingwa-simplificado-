@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wing Ya Chifa - Sistema de Gestión</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="brand-section">
+            <div class="brand-logo">WY</div>
+            <span>Wing Ya Chifa</span>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a class="nav-link active" id="nav-home" onclick="navigateTo('home')">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="nav-crud" onclick="navigateTo('crud')">
+                    <i class="fas fa-boxes"></i> Gestionar Insumos
+                </a>
+            </li>
+        </ul>
+        <div class="logout-section mt-auto">
+            <a href="#" class="logout-link" onclick="alert('Sesión cerrada (Simulación)')">
+                <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- SECCIÓN 1: INICIO (BIENVENIDA) -->
+        <div id="section-home" class="welcome-container">
+            <div class="welcome-logo-large">WY</div>
+            <h1 class="welcome-title">BIENVENIDO</h1>
+            <p class="welcome-subtitle">Sistema de Gestión de Insumos - Wing Ya Chifa</p>
+
+            <div class="contact-card">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Dirección:</strong><br>
+                        Av. América Sur 4172 Urb. San Andrés III etapa, Trujillo, Peru
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <strong>Teléfono:</strong><br>
+                        (044) 222434
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>
+                        <strong>Celular:</strong><br>
+                        +51 958 887 089
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Correo:</strong><br>
+                        wingyafc@gmail.com
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: CRUD GESTIÓN DE INSUMOS -->
+        <div id="section-crud" class="d-none">
+            <div class="container-fluid">
+                <h2 class="mb-4">Gestión de Insumos</h2>
+
+                <!-- Formulario -->
+                <div class="card no-print">
+                    <div class="card-header">
+                        <span id="formTitle">Registrar Nuevo Insumo</span>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="resetForm()">Limpiar</button>
+                    </div>
+                    <div class="card-body">
+                        <form id="insumoForm" onsubmit="handleFormSubmit(event)">
+                            <input type="hidden" id="insumoId">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Nombre del Insumo</label>
+                                    <input type="text" class="form-control" id="nombre" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Categoría</label>
+                                    <select class="form-select" id="categoria" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="Granos">Granos</option>
+                                        <option value="Carnes">Carnes</option>
+                                        <option value="Salsas">Salsas</option>
+                                        <option value="Líquidos">Líquidos</option>
+                                        <option value="Verduras">Verduras</option>
+                                        <option value="Otros">Otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Stock</label>
+                                    <input type="number" class="form-control" id="stock" min="0" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Unidad</label>
+                                    <select class="form-select" id="unidad" required>
+                                        <option value="kg">kg</option>
+                                        <option value="lt">lt</option>
+                                        <option value="und">und</option>
+                                        <option value="g">g</option>
+                                        <option value="ml">ml</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-primary-custom w-100">
+                                        <i class="fas fa-save"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Tabla -->
+                <div class="card">
+                    <div class="card-header">
+                        Inventario Actual
+                        <div class="d-flex gap-2 no-print">
+                            <input type="text" class="form-control form-control-sm" id="searchInput"
+                                placeholder="Buscar insumo..." onkeyup="searchInsumo()">
+                            <button class="btn btn-sm btn-secondary" onclick="printReport()">
+                                <i class="fas fa-print"></i> Reporte
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Categoría</th>
+                                        <th>Stock</th>
+                                        <th>Unidad</th>
+                                        <th class="text-end no-print">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="insumosTableBody">
+                                    <!-- Filas JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- App Logic -->
+    <script src="script.js"></script>
+</body>
+
+</html>
